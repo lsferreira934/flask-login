@@ -25,11 +25,12 @@ class User(db.Model):
         'email': self.email
     }
   
-db.create_all()
-
-@app.route('/test', methods=['GET'])
+with app.app_context():
+  db.create_all()
+  
+@app.route('/', methods=['GET'])
 def test():
-  return make_response(jsonify({'message': 'test route'}), 200)
+  return make_response(jsonify({'message': 'Bem vindo ao Flask-Login'}), 200)
 
 @app.route('/user', methods=['POST'])
 def create_user():
